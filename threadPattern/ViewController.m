@@ -121,20 +121,15 @@
  */
 -(void)goGlobalGlobalThreadAsync {
     // #3#3#5
-    NSLog(@"1番に出力");
     dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(globalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
         dispatch_async(globalThread, ^{
             uint t = 4;sleep(t);
-            NSLog(@"4番に出力");
         });
         //uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 /*
