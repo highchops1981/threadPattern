@@ -143,20 +143,15 @@
  */
 -(void)goGlobalGlobalThreadSync {
     // #3#3#6
-    NSLog(@"1番に出力");
     dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(globalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
         dispatch_sync(globalThread, ^{
             uint t = 4;sleep(t);
-            NSLog(@"4番に出力");
         });
         //uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     //uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 /*
@@ -170,20 +165,15 @@
  */
 -(void)goGlobalOriginalThreadAsync {
     // #3#2#5
-    NSLog(@"1番に出力");
     dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(globalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t originalThread = dispatch_queue_create("#3#2#5",nil);
         dispatch_async(originalThread, ^{
             uint t = 4;sleep(t);
-            NSLog(@"4番に出力");
         });
         //uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 /*
@@ -197,20 +187,15 @@
  */
 -(void)goGlobalOriginalThreadSync {
     // #3#2#6
-    NSLog(@"1番に出力");
     dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(globalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t originalThread = dispatch_queue_create("#3#2#6",nil);
         dispatch_sync(originalThread, ^{
         //    uint t = 4;sleep(t);
-            NSLog(@"4番に出力");
         });
         uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     //uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 /*
@@ -224,20 +209,15 @@
  */
 -(void)goGlobalMainThreadAsync {
     // #3#1#5
-    NSLog(@"1番に出力");
     dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(globalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t mainThread = dispatch_get_main_queue();
         dispatch_async(mainThread, ^{
            uint t = 4;sleep(t);
-            NSLog(@"4番に出力");
         });
         //uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     //uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 /*
@@ -251,20 +231,15 @@
  */
 -(void)goGlobalMainThreadSync {
     // #3#1#6
-    NSLog(@"1番に出力");
     dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(globalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t mainThread = dispatch_get_main_queue();
         dispatch_sync(mainThread, ^{
             uint t = 4;sleep(t);
-            NSLog(@"4番に出力");
         });
         //uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 /*
@@ -278,20 +253,15 @@
  */
 -(void)goOriginalGlobalThreadAsync {
     // #2#3#5
-    NSLog(@"1番に出力");
     dispatch_queue_t originalThread = dispatch_queue_create("#2#3#5",nil);
     dispatch_async(originalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t originalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
         dispatch_async(originalThread, ^{
             uint t = 4;sleep(t);
-            NSLog(@"4番に出力");
         });
         //uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 /*
@@ -305,20 +275,15 @@
  */
 -(void)goOriginalGlobalThreadSync {
     // #2#3#5
-    NSLog(@"1番に出力");
     dispatch_queue_t originalThread = dispatch_queue_create("#2#3#5",nil);
     dispatch_async(originalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t originalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
         dispatch_sync(originalThread, ^{
             uint t = 4;sleep(t);
-            NSLog(@"4番に出力");
         });
         //uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 
@@ -333,20 +298,15 @@
  */
 -(void)goOriginalOriginalThreadAsync {
     // #2#2#5
-    NSLog(@"1番に出力");
     dispatch_queue_t originalThread = dispatch_queue_create("#2#2#5",nil);
     dispatch_async(originalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t originalThread = dispatch_queue_create("#2#2#5",nil);
         dispatch_async(originalThread, ^{
             //uint t = 4;sleep(t);
-            NSLog(@"4番に出力");
         });
         uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     //uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 /*
@@ -360,20 +320,15 @@
  */
 -(void)goOriginalOriginalThreadSync {
     // #2#2#6
-    NSLog(@"1番に出力");
     dispatch_queue_t originalThread = dispatch_queue_create("#2#2#6-1",nil);
     dispatch_async(originalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t originalThread = dispatch_queue_create("#2#2#6-2",nil);
         dispatch_sync(originalThread, ^{
             uint t = 4;sleep(t);
-            NSLog(@"4番に出力");
         });
         //uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     //uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 /*
@@ -387,19 +342,14 @@
  */
 -(void)goOriginalMainThreadAsync {
     // #2#1#5
-    NSLog(@"1番に出力");
     dispatch_queue_t originalThread = dispatch_queue_create("#2#1#5",nil);
     dispatch_async(originalThread, ^{
-         NSLog(@"2番に出力");
         dispatch_queue_t mainThread = dispatch_get_main_queue();
         dispatch_async(mainThread, ^{
-            NSLog(@"4番に出力");
         });
         uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     uint t = 10;sleep(t);
-    NSLog(@"5番に出力");
 }
 
 /*
@@ -413,21 +363,15 @@
  */
 -(void)goOriginalMainThreadSync {
     // #2#1#5
-    NSLog(@"1番に出力");
     dispatch_queue_t originalThread = dispatch_queue_create("#2#1#5",nil);
     dispatch_async(originalThread, ^{
-        NSLog(@"2番に出力");
         dispatch_queue_t mainThread = dispatch_get_main_queue();
         dispatch_sync(mainThread, ^{
             uint t = 4;sleep(t);
-            NSLog(@"3番に出力");
         });
        // uint t = 4;sleep(t);
-
-        NSLog(@"5番に出力");
     });
     uint t = 10;sleep(t);
-    NSLog(@"4番に出力");
 }
 
 /*
@@ -441,14 +385,10 @@
  */
 -(void)goGlobalThreadAsync {
     // #1#3#5
-    NSLog(@"1番に出力");
     dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(globalThread, ^{
         uint t = 4;sleep(t);
-        NSLog(@"2番に出力");
     });
-    
-    NSLog(@"3番に出力");
 }
 
 /*
@@ -462,14 +402,10 @@
  */
 -(void)goGlobalThreadSync {
     // #1#3#6
-    NSLog(@"1番に出力");
     dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_sync(globalThread, ^{
         uint t = 4;sleep(t);
-        NSLog(@"2番に出力");
     });
-    
-    NSLog(@"3番に出力");
 }
 
 /*
@@ -485,16 +421,12 @@ thread NO：同じ
     // #1#1#5
     dispatch_queue_t mainThread = dispatch_get_main_queue();
     dispatch_queue_t mainThread2 = dispatch_get_main_queue();
-    
     dispatch_async(mainThread, ^{
         dispatch_async(mainThread2, ^{
-            NSLog(@"3番に出力");
         });
         //uint s = 4;sleep(s);
-        NSLog(@"2番に出力");
     });
     uint t = 4;sleep(t);
-    NSLog(@"1番に出力");
 }
 
 /*
@@ -508,12 +440,9 @@ thread NO：同じ
  */
 -(void)goMainThreadSync {
     // #1#1#6
-    NSLog(@"1番に出力");
     dispatch_queue_t mainThread = dispatch_get_main_queue();
     dispatch_sync(mainThread, ^{
-        NSLog(@"でない");
     });
-    NSLog(@"でない");
 }
 
 /*
@@ -527,13 +456,10 @@ thread NO：同じ
  */
 -(void)goOriginalThreadAsync {
     // #1#2#5
-    NSLog(@"1番に出力");
     dispatch_queue_t originalThread = dispatch_queue_create("#1#2#5",nil);
     dispatch_async(originalThread, ^{
-        NSLog(@"2番に出力");
     });
     uint t = 4;sleep(t);
-    NSLog(@"3番に出力");
 }
 
 /*
@@ -547,20 +473,15 @@ thread NO：同じ
  */
 -(void)goOriginalThreadSync {
     // #1#2#6
-    NSLog(@"1番に出力");
     dispatch_queue_t originalThread = dispatch_queue_create("#1#2#6",nil);
     dispatch_sync(originalThread, ^{
         uint t = 4;sleep(t);
-        NSLog(@"2番に出力");
     });
     
     dispatch_queue_t originalThread2 = dispatch_queue_create("#1#2#62",nil);
     dispatch_sync(originalThread2, ^{
-//        uint t = 4;sleep(t);
-        NSLog(@"3番に出力");
     });
     uint t = 4;sleep(t);
-    NSLog(@"4番に出力");
 }
 
 
