@@ -108,6 +108,8 @@
   #3 global thread
    #5 dispatch_async
    #6 dispatch_sync
+ 
+ thread label 変数の使い方でthreadの挙動はどうなるか
  */
 
 /*
