@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -52,101 +52,129 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGl-Ra-xIH">
-                                <rect key="frame" x="47" y="125" width="55" height="30"/>
+                                <rect key="frame" x="47" y="110" width="55" height="30"/>
                                 <state key="normal" title="gtasync"/>
                                 <connections>
                                     <action selector="gtasync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OnQ-vH-8BH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H9w-MN-NVR">
-                                <rect key="frame" x="199" y="125" width="46" height="30"/>
+                                <rect key="frame" x="199" y="110" width="46" height="30"/>
                                 <state key="normal" title="gtsync"/>
                                 <connections>
                                     <action selector="gtsync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3yF-Fp-sl5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wkx-7y-Bhf">
-                                <rect key="frame" x="41" y="184" width="67" height="30"/>
+                                <rect key="frame" x="41" y="144" width="67" height="30"/>
                                 <state key="normal" title="omtasync"/>
                                 <connections>
                                     <action selector="omtasync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oj9-EI-cDu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gm-8f-7PD">
-                                <rect key="frame" x="183" y="184" width="59" height="30"/>
+                                <rect key="frame" x="183" y="144" width="59" height="30"/>
                                 <state key="normal" title="omtsync"/>
                                 <connections>
                                     <action selector="omtaync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wcB-eF-F67"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDU-qU-XNn">
-                                <rect key="frame" x="39" y="232" width="63" height="30"/>
+                                <rect key="frame" x="39" y="182" width="63" height="30"/>
                                 <state key="normal" title="ootasync"/>
                                 <connections>
                                     <action selector="ootasync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CLU-tL-FAS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUc-wW-lV1">
-                                <rect key="frame" x="195" y="232" width="55" height="30"/>
+                                <rect key="frame" x="195" y="182" width="55" height="30"/>
                                 <state key="normal" title="ootsync"/>
                                 <connections>
                                     <action selector="ootsync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ir4-bu-yw0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uoj-5W-Psf">
-                                <rect key="frame" x="43" y="277" width="63" height="30"/>
+                                <rect key="frame" x="43" y="215" width="63" height="30"/>
                                 <state key="normal" title="ogtasync"/>
                                 <connections>
                                     <action selector="ogtasync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="63F-p1-33o"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45x-a1-z5c">
-                                <rect key="frame" x="195" y="277" width="55" height="30"/>
+                                <rect key="frame" x="195" y="215" width="55" height="30"/>
                                 <state key="normal" title="ogtsync"/>
                                 <connections>
                                     <action selector="ogtsync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Eb4-A6-AQz"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqC-nH-poz">
-                                <rect key="frame" x="33" y="315" width="67" height="30"/>
+                                <rect key="frame" x="33" y="247" width="67" height="30"/>
                                 <state key="normal" title="gmtasync"/>
                                 <connections>
                                     <action selector="gmtasync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kPD-av-b7k"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAi-XK-oeC">
-                                <rect key="frame" x="197" y="323" width="60" height="30"/>
+                                <rect key="frame" x="197" y="255" width="60" height="30"/>
                                 <state key="normal" title="gmtaync"/>
                                 <connections>
                                     <action selector="gmtaync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vn2-S0-5eh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btK-QW-U3d">
-                                <rect key="frame" x="54" y="374" width="63" height="30"/>
+                                <rect key="frame" x="54" y="285" width="63" height="30"/>
                                 <state key="normal" title="gotasync"/>
                                 <connections>
                                     <action selector="gotasync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="byR-Lb-PLw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9Z-V9-lh6">
-                                <rect key="frame" x="200" y="374" width="55" height="30"/>
+                                <rect key="frame" x="200" y="285" width="55" height="30"/>
                                 <state key="normal" title="gotsync"/>
                                 <connections>
                                     <action selector="gotsync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pnW-0O-9RE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eS8-1h-STy">
-                                <rect key="frame" x="50" y="421" width="64" height="30"/>
+                                <rect key="frame" x="50" y="317" width="64" height="30"/>
                                 <state key="normal" title="ggtasync"/>
                                 <connections>
                                     <action selector="ggtasync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g6b-b2-sIM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLH-V2-AvL">
-                                <rect key="frame" x="204" y="421" width="55" height="30"/>
+                                <rect key="frame" x="204" y="317" width="55" height="30"/>
                                 <state key="normal" title="ggtsync"/>
                                 <connections>
                                     <action selector="ggtsync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6xs-oQ-d5r"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qU6-Da-U2b">
+                                <rect key="frame" x="35" y="356" width="75" height="30"/>
+                                <state key="normal" title="mostasync"/>
+                                <connections>
+                                    <action selector="mostasync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c1c-49-o0m"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jU5-32-qpI">
+                                <rect key="frame" x="184" y="355" width="83" height="30"/>
+                                <state key="normal" title="moostasync"/>
+                                <connections>
+                                    <action selector="moostasync:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o0l-ds-xGf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wef-aL-pOk">
+                                <rect key="frame" x="27" y="400" width="92" height="30"/>
+                                <state key="normal" title="synchronized"/>
+                                <connections>
+                                    <action selector="synchronized:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VP8-Ec-wr0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nza-nl-R2P">
+                                <rect key="frame" x="154" y="400" width="142" height="30"/>
+                                <state key="normal" title="synchronizedUpdate"/>
+                                <connections>
+                                    <action selector="synchronizedUpdate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YhL-E9-a46"/>
                                 </connections>
                             </button>
                         </subviews>

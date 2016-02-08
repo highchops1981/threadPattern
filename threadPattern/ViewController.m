@@ -14,6 +14,10 @@
 
 @implementation ViewController
 
+NSString *str;
+dispatch_queue_t synchronizedThread;
+dispatch_queue_t synchronizedThread2;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -76,6 +80,18 @@
 - (IBAction)ggtsync:(id)sender {
     [self goGlobalGlobalThreadSync];
 }
+- (IBAction)mostasync:(id)sender {
+    [self goMainSameOriginalsThreadAsync];
+}
+- (IBAction)moostasync:(id)sender {
+    [self goMainOhterOriginalsThreadAsync];
+}
+- (IBAction)synchronized:(id)sender {
+    [self goSynchronized];
+}
+- (IBAction)synchronizedUpdate:(id)sender {
+    [self goSynchronizedUpdate];
+}
 
 /*
  #1 main thread
@@ -109,8 +125,85 @@
    #5 dispatch_async
    #6 dispatch_sync
  
- thread label 変数の使い方でthreadの挙動はどうなるか
+ #@synchronized　は別にまとめる
+ 
+ 
+ 
  */
+
+/*
+ */
+-(void)goSynchronized {
+    str = @"original";
+    synchronizedThread = dispatch_queue_create("synchronizedThread",nil);
+    dispatch_async(synchronizedThread, ^{
+        @synchronized(self) {
+            sleep(10);
+            NSLog(@"str=%@",str);
+        }
+    });
+}
+
+/*
+ */
+-(void)goSynchronizedUpdate {
+    //synchronizedThread = dispatch_queue_create("synchronizedThread",nil);
+    dispatch_async(synchronizedThread, ^{
+        @synchronized(self) {
+            str = @"update";
+            NSLog(@"str=%@",str);
+        }
+    });
+}
+
+
+/*
+ 元：main
+ 先：global thread異なる変数で複数回利用
+ 方法：async
+ 開始：即時
+ 割込：あり
+ 追越：あり
+ thread NO：別
+ */
+-(void)goMainOhterOriginalsThreadAsync {
+    dispatch_queue_t originalThread = dispatch_queue_create("MainOriginalsThreadAsync",nil);
+    for (int i=0; i<5; i++) {
+        dispatch_async(originalThread, ^{
+            uint t = 1;sleep(t);
+            NSLog(@"i=%d",i);
+        });
+    }
+
+    dispatch_queue_t originalThread2 = dispatch_queue_create("MainOriginalsThreadAsync",nil);
+    for (int s=5; s<10; s++) {
+        dispatch_async(originalThread2, ^{
+            NSLog(@"s=%d",s);
+        });
+    }
+}
+
+
+/*
+ 元：main
+ 先：global thread同じ変数で複数回利用
+ 方法：async
+ 開始：直列
+ 割込：なし
+ 追越：なし
+ thread NO：同
+ */
+-(void)goMainSameOriginalsThreadAsync {
+    dispatch_queue_t originalThread = dispatch_queue_create("MainOriginalsThreadAsync",nil);
+    for (int i=0; i<5; i++) {
+        dispatch_async(originalThread, ^{
+            if (i==0) {
+                uint t = 4;sleep(t);
+            }
+            NSLog(@"i=%d",i);
+        });
+    }
+}
 
 /*
  元：global
