@@ -415,7 +415,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = threadPattern/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.my-pace.threadPattern";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -426,7 +425,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = threadPattern/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.co.my-pace.threadPattern";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -498,6 +496,7 @@
 				69F2F59B1C6414B6005680BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		69F2F59C1C6414B6005680BC /* Build configuration list for PBXNativeTarget "threadPatternTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +505,7 @@
 				69F2F59E1C6414B6005680BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		69F2F59F1C6414B6005680BC /* Build configuration list for PBXNativeTarget "threadPatternUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +514,7 @@
 				69F2F5A11C6414B6005680BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

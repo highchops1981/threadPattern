@@ -26,559 +26,334 @@ dispatch_queue_t synchronizedThread2;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)mainThreadAsyngButton:(id)sender {
+- (IBAction)btnMainThreadAsync:(id)sender {
     [self goMainThreadAsync];
 }
-- (IBAction)mainThreadSyncButton:(id)sender {
+- (IBAction)btnMainThreadSync:(id)sender {
     [self goMainThreadSync];
 }
-- (IBAction)otasync:(id)sender {
-    [self goOriginalThreadAsync];
+- (IBAction)btnPrivateThreadAsync:(id)sender {
+    [self goPrivateThreadAsync];
 }
-- (IBAction)otsync:(id)sender {
-    [self goOriginalThreadSync];
+- (IBAction)btnPrivateThreadSync:(id)sender {
+    [self goPrivateThreadSync];
 }
-- (IBAction)gtasync:(id)sender {
+- (IBAction)btnGlobalThreadAsync:(id)sender {
     [self goGlobalThreadAsync];
 }
-- (IBAction)gtsync:(id)sender {
+- (IBAction)btnGlobalThreadSync:(id)sender {
     [self goGlobalThreadSync];
 }
-- (IBAction)omtasync:(id)sender {
-    [self goOriginalMainThreadAsync];
+- (IBAction)btnPrivateMainThreadAsync:(id)sender {
+    [self goPrivateMainThreadAsync];
 }
-- (IBAction)omtaync:(id)sender {
-    [self goOriginalMainThreadSync];
+- (IBAction)btnPrivateMainThreadSync:(id)sender {
+    [self goPrivateMainThreadSync];
 }
-- (IBAction)ootasync:(id)sender {
-    [self goOriginalOriginalThreadAsync];
+- (IBAction)btnPrivatePrivateThreadAsync:(id)sender {
+    [self goPrivatePrivateThreadAsync];
 }
-- (IBAction)ootsync:(id)sender {
-    [self goOriginalOriginalThreadSync];
+- (IBAction)btnPrivatePrivateThreadSync:(id)sender {
+    [self goPrivatePrivateThreadSync];
 }
-- (IBAction)ogtasync:(id)sender {
-    [self goOriginalGlobalThreadAsync];
+- (IBAction)btnPrivateGlobalThreadAsync:(id)sender {
+    [self goPrivateGlobalThreadAsync];
 }
-- (IBAction)ogtsync:(id)sender {
-    [self goOriginalGlobalThreadSync];
+- (IBAction)btnPrivateGlobalThreadSync:(id)sender {
+    [self goPrivateGlobalThreadSync];
 }
-- (IBAction)gmtasync:(id)sender {
+- (IBAction)btnGlobalMainThreadAsync:(id)sender {
     [self goGlobalMainThreadAsync];
 }
-- (IBAction)gmtaync:(id)sender {
+- (IBAction)btnGlobalMainThreadSync:(id)sender {
     [self goGlobalMainThreadSync];
 }
-- (IBAction)gotasync:(id)sender {
+- (IBAction)btnGlobalOriginalThreadAsync:(id)sender {
     [self goGlobalOriginalThreadAsync];
 }
-- (IBAction)gotsync:(id)sender {
+- (IBAction)btnGlobalOriginalThreadSync:(id)sender {
     [self goGlobalOriginalThreadSync];
 }
-- (IBAction)ggtasync:(id)sender {
+- (IBAction)btnGlobalGlobalThreadAsync:(id)sender {
     [self goGlobalGlobalThreadAsync];
 }
-- (IBAction)ggtsync:(id)sender {
+- (IBAction)btnGlobalGlobalThreadSync:(id)sender {
     [self goGlobalGlobalThreadSync];
 }
-- (IBAction)mostasync:(id)sender {
-    [self goMainSameOriginalsThreadAsync];
-}
-- (IBAction)moostasync:(id)sender {
-    [self goMainOhterOriginalsThreadAsync];
-}
-- (IBAction)synchronized:(id)sender {
-    [self goSynchronized];
-}
-- (IBAction)synchronizedUpdate:(id)sender {
-    [self goSynchronizedUpdate];
+
+/*
+ 1.メインスキューにタスクを非同期でディスパッチする
+ */
+-(void)goMainThreadAsync {
+    NSLog(@"1:goMainThreadAsync");
+    dispatch_queue_t mainQuere = dispatch_get_main_queue();
+    dispatch_queue_t mainQuere2 = dispatch_get_main_queue();
+    dispatch_async(mainQuere, ^{
+        dispatch_async(mainQuere2, ^{
+            NSLog(@"pass3");
+        });
+        uint s = 2;sleep(s);
+        NSLog(@"pass2");
+    });
+    uint t = 4;sleep(t);
+    NSLog(@"pass1");
 }
 
 /*
- #1 main thread
-  #1 main thread
-   #5 dispatch_async
-   #6 dispatch_sync
-  #2 original thread
-   #5 dispatch_async
-   #6 dispatch_sync
-  #3 global thread
-   #5 dispatch_async
-   #6 dispatch_sync
- #2 original thread
-  #1 main thread
-   #5 dispatch_async
-   #6 dispatch_sync
-  #2 original thread
-   #5 dispatch_async
-   #6 dispatch_sync
-  #3 global thread
-   #5 dispatch_async
-   #6 dispatch_sync
- #3 global thread
-  #1 main thread
-   #5 dispatch_async
-   #6 dispatch_sync
-  #2 original thread
-   #5 dispatch_async
-   #6 dispatch_sync
-  #3 global thread
-   #5 dispatch_async
-   #6 dispatch_sync
- 
- #@synchronized　は別にまとめる
- 
- 
- 
+ 2.メインスキューにタスクを同期でディスパッチする
  */
+-(void)goMainThreadSync {
+    NSLog(@"2:goMainThreadSync");
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    dispatch_sync(mainQueue, ^{
+        NSLog(@"pass2");
+    });
+    NSLog(@"pass1");
+}
 
 /*
+ 3.プライベートキューにタスクを非同期でディスパッチする
  */
--(void)goSynchronized {
-    str = @"original";
-    synchronizedThread = dispatch_queue_create("synchronizedThread",nil);
-    dispatch_async(synchronizedThread, ^{
-        @synchronized(self) {
-            sleep(10);
-            NSLog(@"str=%@",str);
-        }
+-(void)goPrivateThreadAsync {
+    NSLog(@"3:goPrivateThreadAsync");
+    dispatch_queue_t privateQueue = dispatch_queue_create("private",nil);
+    dispatch_async(privateQueue, ^{
+        NSLog(@"pass2");
+    });
+    uint t = 4;sleep(t);
+    NSLog(@"pass1");
+}
+
+/*
+ 4.プライベートキューにタスクを同期でディスパッチする
+ */
+-(void)goPrivateThreadSync {
+    NSLog(@"4:goPrivateThreadSync");
+    dispatch_queue_t privateQueue = dispatch_queue_create("private",nil);
+    dispatch_sync(privateQueue, ^{
+        uint t = 4;sleep(t);
+        NSLog(@"pass2");
+    });
+    NSLog(@"pass1");
+}
+
+/*
+ 5.グローバルキューにタスクを非同期でディスパッチする
+ */
+-(void)goGlobalThreadAsync {
+    NSLog(@"5:goGlobalThreadAsync");
+    dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_async(globalQueue, ^{
+        uint t = 4;sleep(t);
+        NSLog(@"pass2");
+    });
+    NSLog(@"pass1");
+}
+
+/*
+ 6.グローバルキューにタスクを同期でディスパッチする
+ */
+-(void)goGlobalThreadSync {
+    NSLog(@"6:goGlobalThreadSync");
+    dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_sync(globalQueue, ^{
+        uint t = 4;sleep(t);
+        NSLog(@"pass2");
+    });
+    NSLog(@"pass1");
+}
+
+/*
+ 7.プライベートキューからメインキューに非同期でディスパッチする
+ */
+-(void)goPrivateMainThreadAsync {
+    NSLog(@"7:goPrivateMainThreadAsync");
+    dispatch_queue_t privateQueue = dispatch_queue_create("private",nil);
+    dispatch_async(privateQueue, ^{
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        dispatch_async(mainQueue, ^{
+            uint t = 4;sleep(t);
+            NSLog(@"pass2");
+        });
+        NSLog(@"pass1");
     });
 }
 
 /*
+ 8.プライベートキューからメインキューに同期でディスパッチする
  */
--(void)goSynchronizedUpdate {
-    //synchronizedThread = dispatch_queue_create("synchronizedThread",nil);
-    dispatch_async(synchronizedThread, ^{
-        @synchronized(self) {
-            str = @"update";
-            NSLog(@"str=%@",str);
-        }
+-(void)goPrivateMainThreadSync {
+    NSLog(@"8:goPrivateMainThreadSync");
+    dispatch_queue_t privateQueue = dispatch_queue_create("private",nil);
+    dispatch_async(privateQueue, ^{
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        dispatch_sync(mainQueue, ^{
+            uint t = 4;sleep(t);
+            NSLog(@"pass2");
+        });
+        NSLog(@"pass1");
     });
 }
 
-
 /*
- 元：main
- 先：global thread異なる変数で複数回利用
- 方法：async
- 開始：即時
- 割込：あり
- 追越：あり
- thread NO：別
+ 9.プライベートキューからプライベートキューに非同期でディスパッチする
  */
--(void)goMainOhterOriginalsThreadAsync {
-    dispatch_queue_t originalThread = dispatch_queue_create("MainOriginalsThreadAsync",nil);
-    for (int i=0; i<5; i++) {
-        dispatch_async(originalThread, ^{
-            uint t = 1;sleep(t);
-            NSLog(@"i=%d",i);
+-(void)goPrivatePrivateThreadAsync {
+    NSLog(@"9:goPrivatePrivateThreadAsync");
+    dispatch_queue_t privateThread = dispatch_queue_create("private",nil);
+    dispatch_async(privateThread, ^{
+        dispatch_queue_t privateThread = dispatch_queue_create("private",nil);
+        dispatch_async(privateThread, ^{
+            uint t = 4;sleep(t);
+            NSLog(@"pass2");
         });
-    }
-
-    dispatch_queue_t originalThread2 = dispatch_queue_create("MainOriginalsThreadAsync",nil);
-    for (int s=5; s<10; s++) {
-        dispatch_async(originalThread2, ^{
-            NSLog(@"s=%d",s);
-        });
-    }
-}
-
-
-/*
- 元：main
- 先：global thread同じ変数で複数回利用
- 方法：async
- 開始：直列
- 割込：なし
- 追越：なし
- thread NO：同
- */
--(void)goMainSameOriginalsThreadAsync {
-    dispatch_queue_t originalThread = dispatch_queue_create("MainOriginalsThreadAsync",nil);
-    for (int i=0; i<5; i++) {
-        dispatch_async(originalThread, ^{
-            if (i==0) {
-                uint t = 4;sleep(t);
-            }
-            NSLog(@"i=%d",i);
-        });
-    }
+        NSLog(@"pass1");
+    });
 }
 
 /*
- 元：global
- 先：global
- 方法：async
- 開始：即
- 割込：なし
- 追越：あり
- thread NO：別
+ 10.プライベートキューからプライベートキューに同期でディスパッチする
+ */
+-(void)goPrivatePrivateThreadSync {
+    NSLog(@"10:goPrivatePrivateThreadSync");
+    dispatch_queue_t privateThread = dispatch_queue_create("private",nil);
+    dispatch_async(privateThread, ^{
+        dispatch_queue_t privateThread = dispatch_queue_create("private",nil);
+        dispatch_sync(privateThread, ^{
+            uint t = 4;sleep(t);
+            NSLog(@"pass2");
+        });
+        NSLog(@"pass1");
+    });
+}
+
+/*
+ 11.プライベートキューからグローバルキューに非同期でディスパッチする
+ */
+-(void)goPrivateGlobalThreadAsync {
+    NSLog(@"11:goPrivateGlobalThreadAsync");
+    dispatch_queue_t privateThread = dispatch_queue_create("private",nil);
+    dispatch_async(privateThread, ^{
+        dispatch_queue_t privateThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+        dispatch_async(privateThread, ^{
+            uint t = 4;sleep(t);
+            NSLog(@"pass2");
+        });
+        NSLog(@"pass1");
+    });
+}
+
+/*
+ 12.プライベートキューからグローバルキューに同期でディスパッチする
+ */
+-(void)goPrivateGlobalThreadSync {
+    NSLog(@"12:goPrivateGlobalThreadSync");
+    dispatch_queue_t privateThread = dispatch_queue_create("private",nil);
+    dispatch_async(privateThread, ^{
+        dispatch_queue_t privateThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+        dispatch_sync(privateThread, ^{
+            uint t = 4;sleep(t);
+            NSLog(@"pass2");
+        });
+        NSLog(@"pass1");
+    });
+}
+
+/*
+ 13.グローバルキューからメインキューに非同期でディスパッチする
+ */
+-(void)goGlobalMainThreadAsync {
+    NSLog(@"13:goGlobalMainThreadAsync");
+    dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_async(globalThread, ^{
+        dispatch_queue_t mainThread = dispatch_get_main_queue();
+        dispatch_async(mainThread, ^{
+            uint t = 4;sleep(t);
+            NSLog(@"pass2");
+        });
+        NSLog(@"pass1");
+    });
+}
+
+/*
+ 14.グローバルからメインキューに同期でディスパッチする
+ */
+-(void)goGlobalMainThreadSync {
+    NSLog(@"14:goGlobalMainThreadSync");
+    dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_async(globalThread, ^{
+        dispatch_queue_t mainThread = dispatch_get_main_queue();
+        dispatch_sync(mainThread, ^{
+            uint t = 4;sleep(t);
+            NSLog(@"pass2");
+        });
+        NSLog(@"pass1");
+    });
+}
+
+/*
+ 15.グローバルキューからプライベートキューに非同期でディスパッチする
+ */
+-(void)goGlobalOriginalThreadAsync {
+    NSLog(@"15:goGlobalOriginalThreadAsync");
+    dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_async(globalThread, ^{
+        dispatch_queue_t privateThread = dispatch_queue_create("private",nil);
+        dispatch_async(privateThread, ^{
+            uint t = 4;sleep(t);
+            NSLog(@"pass2");
+        });
+        NSLog(@"pass1");
+    });
+}
+
+/*
+ 16.グローバルキューからプライベートキューに同期でディスパッチする
+ */
+-(void)goGlobalOriginalThreadSync {
+    NSLog(@"16:goGlobalOriginalThreadSync");
+    dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+    dispatch_async(globalThread, ^{
+        dispatch_queue_t privateThread = dispatch_queue_create("private",nil);
+        dispatch_sync(privateThread, ^{
+            uint t = 4;sleep(t);
+            NSLog(@"pass2");
+        });
+        NSLog(@"pass1");
+    });
+}
+
+/*
+ 17.グローバルキューからグローバルキューに非同期でディスパッチする
  */
 -(void)goGlobalGlobalThreadAsync {
-    // #3#3#5
+    NSLog(@"17:goGlobalGlobalThreadAsync");
     dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(globalThread, ^{
         dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
         dispatch_async(globalThread, ^{
             uint t = 4;sleep(t);
+            NSLog(@"pass2");
         });
-        //uint t = 4;sleep(t);
+        NSLog(@"pass1");
     });
-    uint t = 10;sleep(t);
 }
 
 /*
- 元：global
- 先：global
- 方法：sync
- 開始：即
- 割込：あり
- 追越：あり
- thread NO：同
+ 18.グローバルキューからグローバルキューに同期でディスパッチする
  */
 -(void)goGlobalGlobalThreadSync {
-    // #3#3#6
+    NSLog(@"18:goGlobalGlobalThreadSync");
     dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
     dispatch_async(globalThread, ^{
         dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
         dispatch_sync(globalThread, ^{
             uint t = 4;sleep(t);
+            NSLog(@"pass2");
         });
-        //uint t = 4;sleep(t);
-    });
-    //uint t = 10;sleep(t);
-}
-
-/*
- 元：global
- 先：original
- 方法：async
- 開始：即
- 割込：なし
- 追越：あり
- thread NO：別
- */
--(void)goGlobalOriginalThreadAsync {
-    // #3#2#5
-    dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
-    dispatch_async(globalThread, ^{
-        dispatch_queue_t originalThread = dispatch_queue_create("#3#2#5",nil);
-        dispatch_async(originalThread, ^{
-            uint t = 4;sleep(t);
-        });
-        //uint t = 4;sleep(t);
-    });
-    uint t = 10;sleep(t);
-}
-
-/*
- 元：global
- 先：original
- 方法：sync
- 開始：即
- 割込：あり
- 追越：あり
- thread NO：同
- */
--(void)goGlobalOriginalThreadSync {
-    // #3#2#6
-    dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
-    dispatch_async(globalThread, ^{
-        dispatch_queue_t originalThread = dispatch_queue_create("#3#2#6",nil);
-        dispatch_sync(originalThread, ^{
-        //    uint t = 4;sleep(t);
-        });
-        uint t = 4;sleep(t);
-    });
-    //uint t = 10;sleep(t);
-}
-
-/*
- 元：global
- 先：main
- 方法：async
- 開始：即
- 割込：なし
- 追越：あり
- thread NO：別
- */
--(void)goGlobalMainThreadAsync {
-    // #3#1#5
-    dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
-    dispatch_async(globalThread, ^{
-        dispatch_queue_t mainThread = dispatch_get_main_queue();
-        dispatch_async(mainThread, ^{
-           uint t = 4;sleep(t);
-        });
-        //uint t = 4;sleep(t);
-    });
-    //uint t = 10;sleep(t);
-}
-
-/*
- 元：global
- 先：main
- 方法：async
- 開始：即
- 割込：あり
- 追越：あり
- thread NO：別
- */
--(void)goGlobalMainThreadSync {
-    // #3#1#6
-    dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
-    dispatch_async(globalThread, ^{
-        dispatch_queue_t mainThread = dispatch_get_main_queue();
-        dispatch_sync(mainThread, ^{
-            uint t = 4;sleep(t);
-        });
-        //uint t = 4;sleep(t);
-    });
-    uint t = 10;sleep(t);
-}
-
-/*
- 元：original
- 先：global
- 方法：async
- 開始：即
- 割込：なし
- 追越：あり
- thread NO：別
- */
--(void)goOriginalGlobalThreadAsync {
-    // #2#3#5
-    dispatch_queue_t originalThread = dispatch_queue_create("#2#3#5",nil);
-    dispatch_async(originalThread, ^{
-        dispatch_queue_t originalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
-        dispatch_async(originalThread, ^{
-            uint t = 4;sleep(t);
-        });
-        //uint t = 4;sleep(t);
-    });
-    uint t = 10;sleep(t);
-}
-
-/*
- 元：original
- 先：global
- 方法：sync
- 開始：即
- 割込：あり
- 追越：あり
- thread NO：同
- */
--(void)goOriginalGlobalThreadSync {
-    // #2#3#5
-    dispatch_queue_t originalThread = dispatch_queue_create("#2#3#5",nil);
-    dispatch_async(originalThread, ^{
-        dispatch_queue_t originalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
-        dispatch_sync(originalThread, ^{
-            uint t = 4;sleep(t);
-        });
-        //uint t = 4;sleep(t);
-    });
-    uint t = 10;sleep(t);
-}
-
-
-/*
- 元：original
- 先：original
- 方法：async
- 開始：即
- 割込：なし
- 追越：あり
- thread NO：別
- */
--(void)goOriginalOriginalThreadAsync {
-    // #2#2#5
-    dispatch_queue_t originalThread = dispatch_queue_create("#2#2#5",nil);
-    dispatch_async(originalThread, ^{
-        dispatch_queue_t originalThread = dispatch_queue_create("#2#2#5",nil);
-        dispatch_async(originalThread, ^{
-            //uint t = 4;sleep(t);
-        });
-        uint t = 4;sleep(t);
-    });
-    //uint t = 10;sleep(t);
-}
-
-/*
- 元：original
- 先：original
- 方法：sync
- 開始：即
- 割込：あり
- 追越：あり
- thread NO：同
- */
--(void)goOriginalOriginalThreadSync {
-    // #2#2#6
-    dispatch_queue_t originalThread = dispatch_queue_create("#2#2#6-1",nil);
-    dispatch_async(originalThread, ^{
-        dispatch_queue_t originalThread = dispatch_queue_create("#2#2#6-2",nil);
-        dispatch_sync(originalThread, ^{
-            uint t = 4;sleep(t);
-        });
-        //uint t = 4;sleep(t);
-    });
-    //uint t = 10;sleep(t);
-}
-
-/*
- 元：original
- 先：main
- 方法：async
- 開始：即
- 割込：なし
- 追越：あり
- thread NO：別
- */
--(void)goOriginalMainThreadAsync {
-    // #2#1#5
-    dispatch_queue_t originalThread = dispatch_queue_create("#2#1#5",nil);
-    dispatch_async(originalThread, ^{
-        dispatch_queue_t mainThread = dispatch_get_main_queue();
-        dispatch_async(mainThread, ^{
-        });
-        uint t = 4;sleep(t);
-    });
-    uint t = 10;sleep(t);
-}
-
-/*
- 元：original
- 先：main
- 方法：sync
- 開始：即
- 割込：あり
- 追越：あり
- thread NO：別
- */
--(void)goOriginalMainThreadSync {
-    // #2#1#5
-    dispatch_queue_t originalThread = dispatch_queue_create("#2#1#5",nil);
-    dispatch_async(originalThread, ^{
-        dispatch_queue_t mainThread = dispatch_get_main_queue();
-        dispatch_sync(mainThread, ^{
-            uint t = 4;sleep(t);
-        });
-       // uint t = 4;sleep(t);
-    });
-    uint t = 10;sleep(t);
-}
-
-/*
- 元：main
- 先：global
- 方法：async
- 開始：即
- 割込：なし
- 追越：あり
- thread NO：別
- */
--(void)goGlobalThreadAsync {
-    // #1#3#5
-    dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
-    dispatch_async(globalThread, ^{
-        uint t = 4;sleep(t);
+        NSLog(@"pass1");
     });
 }
-
-/*
- 元：main
- 先：global
- 方法：sync
- 開始：即
- 割込：あり
- 追越：あり
- thread NO：同
- */
--(void)goGlobalThreadSync {
-    // #1#3#6
-    dispatch_queue_t globalThread = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
-    dispatch_sync(globalThread, ^{
-        uint t = 4;sleep(t);
-    });
-}
-
-/*
-元：main
-先：main
-方法：async
-開始：待(FIFO 直列)
-割込：なし
-追越：なし
-thread NO：同じ
- */
--(void)goMainThreadAsync {
-    // #1#1#5
-    dispatch_queue_t mainThread = dispatch_get_main_queue();
-    dispatch_queue_t mainThread2 = dispatch_get_main_queue();
-    dispatch_async(mainThread, ^{
-        dispatch_async(mainThread2, ^{
-        });
-        //uint s = 4;sleep(s);
-    });
-    uint t = 4;sleep(t);
-}
-
-/*
- 元：main
- 先：main
- 方法：sync
- 開始：帰ってこない
- 割込：-
- 追越：-
- thread NO：-
- */
--(void)goMainThreadSync {
-    // #1#1#6
-    dispatch_queue_t mainThread = dispatch_get_main_queue();
-    dispatch_sync(mainThread, ^{
-    });
-}
-
-/*
- 元：main
- 先：original
- 方法：async
- 開始：即
- 割込：なし
- 追越：あり
- thread NO：別
- */
--(void)goOriginalThreadAsync {
-    // #1#2#5
-    dispatch_queue_t originalThread = dispatch_queue_create("#1#2#5",nil);
-    dispatch_async(originalThread, ^{
-    });
-    uint t = 4;sleep(t);
-}
-
-/*
- 元：main
- 先：original
- 方法：sync
- 開始：即
- 割込：あり
- 追越：あり
- thread NO：同じ
- */
--(void)goOriginalThreadSync {
-    // #1#2#6
-    dispatch_queue_t originalThread = dispatch_queue_create("#1#2#6",nil);
-    dispatch_sync(originalThread, ^{
-        uint t = 4;sleep(t);
-    });
-    
-    dispatch_queue_t originalThread2 = dispatch_queue_create("#1#2#62",nil);
-    dispatch_sync(originalThread2, ^{
-    });
-    uint t = 4;sleep(t);
-}
-
 
 
 @end
